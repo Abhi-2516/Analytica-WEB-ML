@@ -1,202 +1,138 @@
-Analytica: AI-Powered Data Analysis Platform
+# 🧠 Analytica — AI‑Powered Data Analysis Platform
 
+> **No‑code Automated EDA & Machine Learning**
 
+Analytica is a full‑stack web application designed to make data science accessible to everyone. Users can upload raw data (CSV, Excel, JSON) and instantly receive:
 
-[This project is currently in active development]
+- Automated Exploratory Data Analysis (EDA)
+- Insights & dataset statistics
+- Machine learning model training (classification / regression)
+- Performance reports and metrics comparison
 
-Analytica is a full-stack web application designed to democratize data science. It allows users to upload raw data files (CSV, Excel) and, with no code required, instantly receive a comprehensive Exploratory Data Analysis (EDA) and run multiple predictive machine learning models to uncover insights.
+This project uses a **microservice architecture**, separating the frontend, backend, and AI computation service.
 
-This project is built as a microservice-oriented system, featuring:
+---
 
-React Frontend: A modern, responsive user interface.
+## 🚀 Features
 
-Node.js/Express Backend: A robust MERN stack for user authentication and file management.
+| Category | Feature |
+|----------|---------|
+| ✅ **Frontend (React)** | Modern landing page, animated dashboard, drag‑and‑drop uploads |
+| ✅ **Authentication** | JWT‑based authentication, secure login/signup |
+| ✅ **EDA Engine** | Dataset summary, missing values, feature breakdown |
+| ✅ **ML Pipeline** | Auto detection of regression/classification, trains multiple models |
+| ✅ **Reporting** | Outputs model metrics (Accuracy, F1, R², etc.) |
+| ⏳ **In Progress** | AI Chatbot (LangChain) |
+| 📌 **Planned** | Cloud deployment (Render / Railway / Vercel) |
 
-Python AI Service: A separate FastAPI server that handles all heavy computation (EDA and ML model training).
+---
 
-Core Features (Completed)
+## 🧩 Tech Stack
 
-Modern Landing Page: A fully responsive, animated landing page (built with React & Tailwind CSS).
+### **Frontend (UI)**
+- React.js (Vite)
+- Tailwind CSS
+- Axios
+- React Router
 
-Secure User Authentication: Full sign-up and login capabilities using a MERN stack and JSON Web Tokens (JWT).
+### **Backend (API / Auth / File Management)**
+- Node.js + Express.js
+- MongoDB Atlas + Mongoose
+- Multer (file uploads)
+- JWT Authentication, bcrypt.js
 
-Animated User Dashboard: A "glassmorphism" style dashboard with a live animated gradient background.
+### **AI / Data Service**
+- FastAPI (Python)
+- Pandas, NumPy
+- Scikit‑learn (ML)
+- OpenPyXL (Excel support)
 
-Drag-and-Drop File Uploads: A sleek interface for uploading CSV, XLSX, and JSON files, powered by Multer.
+---
 
-Automated Exploratory Data Analysis (EDA): The moment a file is uploaded, it is sent to the Python API, which instantly returns:
-
-Overall dataset statistics (Total Rows, Columns, Missing Values).
-
-A detailed per-column breakdown (Data Type, Missing Values, Unique Values).
-
-Interactive Predictive Modeling:
-
-Automatically identifies the problem type (Classification vs. Regression) based on the user's chosen target variable.
-
-Trains, tests, and compares multiple scikit-learn models (e.g., Logistic/Linear Regression, Decision Tree, Random Forest).
-
-Returns a clean, simple performance report (Accuracy, F1-Score, R²-Score, etc.) for each model.
-
-Tech Stack
-
-Service
-
-Category
-
-Technology
-
-Frontend
-
-UI
-
-React.js, Vite, React Router
-
-
-
-Styling
-
-Tailwind CSS
-
-
-
-HTTP
-
-Axios
-
-Backend
-
-Runtime
-
-Node.js
-
-
-
-Framework
-
-Express.js
-
-
-
-Database
-
-MongoDB (Atlas), Mongoose
-
-
-
-Auth
-
-JSON Web Token (JWT), bcrypt.js
-
-
-
-File Handling
-
-Multer
-
-AI Service
-
-API
-
-Python 3, FastAPI
-
-
-
-Data Analysis
-
-Pandas, NumPy
-
-
-
-Machine Learning
-
-Scikit-learn
-
-Project Structure
-
-This project is a "monorepo" containing three separate, independent services that run at the same time and communicate via HTTP requests.
-
-/Analytica
+## 📁 Project Structure
+```
+Analytica/
 │
-├── 📂 analytica-frontend/   (React UI)
-│   ├── src/
-│   ├── package.json
-│   └── ...
-│
-├── 📂 analytica-backend/    (Node.js/Express API)
-│   ├── routes/
-│   ├── models/
-│   ├── uploads/
-│   ├── package.json
-│   └── index.js
-│
-└── 📂 analytica-python-api/  (Python/FastAPI AI Service)
-    ├── venv/
-    ├── main.py
-    └── requirements.txt
+├── analytica-frontend/      # React UI (Vite)
+├── analytica-backend/       # Node/Express API
+└── analytica-python-api/    # FastAPI (EDA + ML)
+```
 
+---
 
-How to Run This Project Locally
+## 🛠️ Installation & Setup
 
-You must have three separate terminals open to run this application.
+> You will need **three terminals open** — one for each service.
 
-1. Backend Server (Node.js)
-
-# 1. Navigate to the backend folder
+### 1️⃣ Backend API (Node.js / Express)
+```bash
 cd analytica-backend
-
-# 2. Install dependencies
 npm install
-
-# 3. Create a .env file in this folder and add your variables:
-# MONGO_URI=your_mongodb_atlas_connection_string
-# JWT_SECRET=your_secret_key_for_jwt
-
-# 4. Run the server (runs on http://localhost:5001)
+```
+Create `.env` in the backend folder:
+```
+MONGO_URI=your_mongodb_connection
+JWT_SECRET=your_secret_key
+```
+Run server:
+```bash
 npm run dev
+``` 
+Backend runs at: **http://localhost:5001**
 
+---
 
-2. AI Service (Python)
-
-# 1. Navigate to the Python API folder
+### 2️⃣ AI Service (Python / FastAPI)
+```bash
 cd analytica-python-api
-
-# 2. Create and activate a virtual environment
 py -3 -m venv venv
-.\venv\Scripts\activate
+./venv/Scripts/activate  # Windows
+source venv/bin/activate # Mac/Linux
 
-# 3. Install required libraries
-# (This command has all the *working* libraries for Phases 1-5)
-pip install fastapi "uvicorn[standard]" pandas scikit-learn "openpyxl"
-
-# 4. Run the server (runs on http://localhost:8000)
+pip install fastapi "uvicorn[standard]" pandas scikit-learn openpyxl
 python main.py
+```
+AI Service runs at: **http://localhost:8000**
 
+---
 
-3. Frontend (React)
-
-# 1. Navigate to the frontend folder
+### 3️⃣ Frontend (React)
+```bash
 cd analytica-frontend
-
-# 2. Install dependencies
 npm install
-
-# 3. Run the server (runs on http://localhost:5173)
 npm run dev
+```
+Frontend will open at: **http://localhost:5173**
 
+---
 
-You can now open http://localhost:5173 in your browser to use the application.
+## 🚦 Running the Full System
+After starting all three services, open:
+👉 http://localhost:5173
 
-Future Roadmap (Next Steps)
+Upload data ➝ Choose target column ➝ View EDA ➝ Train ML models
 
-[In Progress] Phase 6: AI Q&A Chatbot: Implementing a langchain agent to allow users to ask natural-language questions about their data. (Currently paused to resolve langchain v0.2.x dependency conflicts).
+---
 
-[Planned] Phase 7: Deployment:
+## 🗺️ Roadmap
 
-Deploy React Frontend to Vercel/Netlify.
+| Phase | Status | Description |
+|--------|--------|-------------|
+| Phase 6 | 🚧 In Progress | LangChain-based AI Q&A chatbot (natural language questions about data) |
+| Phase 7 | ✅ Planned | Cloud deployment (Vercel + Render/Railway + AWS S3) |
 
-Deploy Node.js & Python services to Render/Railway.
+---
 
-Configure cloud file storage with AWS S3.
+## 🤝 Contributing
+Pull requests are welcome! For major changes, please open an issue first.
 
+---
 
+## 📄 License
+MIT License — feel free to use and modify.
+
+---
+
+### ⭐ If you like this project, star the repository!
+```bash
+git clone https://github.com/Abhi-2516/Analytica-WEB-ML.git
