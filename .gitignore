@@ -1,0 +1,3 @@
+echo ".env" >> .gitignore
+echo "*.env" >> .gitignore
+echo "env/" >> .gitignore
